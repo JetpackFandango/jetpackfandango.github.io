@@ -31,8 +31,8 @@ class Tile {
   click(){
     let d = dist(mouseX,mouseY,this.y+25,this.x+25);
     if(d < 25){
-      this.hide = false;
-      // this.hide = this.hide ? false : true;
+      // this.hide = false;
+      this.hide = this.hide ? false : true;
     }
   }
   randomize(){
