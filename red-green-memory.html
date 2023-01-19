@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red Green Memory</title>
+  <style>
+    button{
+  width:100%;
+  height:50px;
+  margin-bottom: 20px;
+}
+
+.circle{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display:inline-block;
+}
+.green{
+  background:green;
+}
+.red{
+  background:red;
+}
+  </style>
+
+</head>
+<body>
+  <button id="red-button">Red</button><button id="green-button">Green</button>
+<button id="clear-button">Clear</button>
+<div id="circle-container"></div>
+</body>
+<script>
+  const greenButton = document.getElementById("green-button");
+  const redButton = document.getElementById("red-button");
+  const clearButton = document.getElementById("clear-button");
+  const circleContainer = document.getElementById("circle-container");
+  
+  greenButton.addEventListener("click", function() {
+    const circle = document.createElement("div");
+   circle.classList.add("circle","green");
+    circleContainer.appendChild(circle);
+  });
+  
+  redButton.addEventListener("click", function() {
+    const circle = document.createElement("div");
+  circle.classList.add("circle","red");;
+    circleContainer.appendChild(circle);
+  });
+  
+  clearButton.addEventListener("click", function() {
+    circleContainer.innerHTML = '';
+  });
+    </script>
+</html>
