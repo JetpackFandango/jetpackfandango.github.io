@@ -6,6 +6,7 @@ class Tile {
     this.row = row;
     this.hide = hide;
     this.type = type;
+    this.debounce = 0;
   }
   display() {
     let c = color(255,255,255);
@@ -14,6 +15,11 @@ class Tile {
     }
     fill(c);
     rect(this.y, this.x, 50, 50);
+    if(this.debounce < 0){
+      this.debounce = 0;
+    } else {
+      this.debounce-=1;
+    }
     // c = color(255,0,0);
     // fill(c);
     // rect(this.y+25,this.x+25,5,5);
@@ -30,9 +36,10 @@ class Tile {
   }
   click(){
     let d = dist(mouseX,mouseY,this.y+25,this.x+25);
-    if(d < 25){
+    if(d < 25 && this.debounce <= 0){
       // this.hide = false;
       this.hide = this.hide ? false : true;
+      this.debounce = 25;
     }
   }
   randomize(){
