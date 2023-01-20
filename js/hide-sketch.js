@@ -16,7 +16,7 @@ function setup() {
   textSize(18);
   
 }
-function mousePressed(){
+function mouseReleased(){
   checkClick(nGrid);
   checkClick(eGrid);
   checkClick(sGrid);
