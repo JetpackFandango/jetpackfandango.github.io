@@ -6,7 +6,7 @@ class Tile {
     this.row = row;
     this.hide = hide;
     this.type = type;
-    this.number = '';
+    this.number = 0;
     this.debounce = 0;
   }
   display() {
@@ -17,7 +17,7 @@ class Tile {
     fill(c);
     rect(this.y, this.x, 40, 40);
     fill(color(0,0,0));
-    if(typeof this.number == 'string'){
+    if(this.number != 0){
       text(this.number, this.y+10,this.x+30);      
     }
     this.debounce -= 1;
@@ -35,9 +35,10 @@ class Tile {
   click(){
     let d = dist(mouseX,mouseY,this.y+25,this.x+25);
     if(d < 25 && this.debounce <= 0){
-      this.number = prompt("#");
+      // this.number = prompt("#");
       this.hide = false;
-      this.debounce = 100;
+      this.number += 1;
+      this.debounce = 10;
     }
   }
   randomize(){
