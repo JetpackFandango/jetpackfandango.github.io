@@ -12,7 +12,7 @@ class Tile {
   display() {
     let c = color(255,255,255);
     if(!this.hide){
-      c = color(255,255,200);
+      c = color(255,255-(20*this.number),255-(20*this.number));
     }
     fill(c);
     rect(this.y, this.x, 40, 40);
