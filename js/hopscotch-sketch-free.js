@@ -5,8 +5,15 @@ let rows = 10;
 let timerValue = 20;
 let num_found = 0;
 let max_blue = 0;
+let video;
 function setup() {
   createCanvas(600, 600);
+  let constraints = {
+    video: {
+    facingMode: { exact: "environment" }
+  }};
+  video = createCapture(constraints);
+  video.size(windowWidth, windowHeight);
   displayButton = createButton("Clear");
   displayButton.mousePressed(hideAll);
   for(let r = 0; r < rows; r++){
@@ -20,6 +27,8 @@ function setup() {
 }
 function draw() {
   background(255);
+  tint(255, 100)
+  image(video,10,10);
   drawGrid();
 }
 function displayColor(){
