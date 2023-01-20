@@ -14,6 +14,7 @@ function setup() {
   }};
   video = createCapture(constraints);
   video.size(windowWidth, windowHeight);
+  video.hide();
   displayButton = createButton("Clear");
   displayButton.mousePressed(hideAll);
   for(let r = 0; r < rows; r++){
@@ -28,7 +29,7 @@ function setup() {
 function draw() {
   background(255);
   tint(255, 100)
-  image(video,10,10);
+  image(video,165,10,200,500);
   drawGrid();
 }
 function displayColor(){
