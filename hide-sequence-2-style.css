@@ -1,0 +1,42 @@
+.keypad{
+  position: fixed;
+  top:0;
+  left:0;
+  max-width:100%;
+}
+.keypad.close{
+  display:none;
+}
+.keypad-btns{
+  max-width:100%;
+  display:flex;
+  flex-wrap: wrap;
+}
+.keypad-btn{
+  padding:5px;
+  cursor:pointer;
+  color:white;
+  margin:10px;
+  font-size:35px;
+  min-width:30px;
+  text-align:center; background:rgba(200,100,100,.9);
+  border-radius: 10%;
+}
+.grid-container {
+  display: grid;
+  max-width:100%;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  margin-bottom: 10px;
+}
+.grid-item.selected {
+  background-color: rgba(200,210,220,1);
+
+}
+.grid-item {
+  background-color: rgba(250,250,250,1);
+  border: 1px solid black;
+  text-align: center;
+  padding:30px;
+  font-size:20px;
+}
