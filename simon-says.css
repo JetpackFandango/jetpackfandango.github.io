@@ -1,13 +1,22 @@
-button{
-  width:100px;
-  height:50px;
-  display:inline-block;
+.color-button {
+  min-height:50px;
   margin-bottom: 10px;
+  background:grey;
+  border: 1px solid black;
+  cursor: pointer;
+  flex:1;
+  border-radius:25px;
+  text-align: center;
 }
 #clear-button{
   display:block;
+  margin-bottom: 10px;
 }
-
+.button-container{
+  display:flex;
+  flex-direction: row;
+  align-items: stretch;
+}
 .circle{
   width: 30px;
   height: 30px;
@@ -16,18 +25,22 @@ button{
   border: 1px solid black;
 }
 .green{
+  color: white;
   background:green;
 }
 .red{
+  color:white;
   background:red;
 }
 .orange{
   background:orange;
 }
 .blue {
+  color:white;
   background: blue;
 }
 .purple {
+  color:white;
   background: purple;
 }
 .yellow {
