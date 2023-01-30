@@ -1,11 +1,10 @@
 .color-button {
-  min-height:50px;
+  min-height:150px;
   margin-bottom: 10px;
   background:grey;
   border: 1px solid black;
   cursor: pointer;
   flex:1;
-  border-radius:25px;
   text-align: center;
 }
 #clear-button{
