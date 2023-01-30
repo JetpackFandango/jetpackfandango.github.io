@@ -4,6 +4,9 @@ button{
   display:inline-block;
   margin-bottom: 10px;
 }
+#clear-button{
+  display:block;
+}
 
 .circle{
   width: 30px;
