@@ -4,7 +4,11 @@ const keypad_buttons = document.querySelector('.keypad-btns');
 for(let i = 0; i < 27; i++){
   const keypad_btn = document.createElement('div');
   keypad_btn.classList.add('keypad-btn');
-  keypad_btn.textContent = i;
+  if(i == 0){
+    keypad_btn.textContent = 'X';
+  } else {
+    keypad_btn.textContent = i;
+  }
  keypad_btn.addEventListener('click', function(){
    const selected = document.querySelector('.selected');
    if(selected){
