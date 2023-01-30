@@ -4,6 +4,9 @@
   left:0;
   max-width:100%;
 }
+.indicator{
+  font-size: 30px;
+}
 .keypad.close{
   display:none;
 }
@@ -42,4 +45,7 @@
   padding:30px;
   min-height:40px;
   font-size:35px;
+}
+body{
+  font-family: roboto;
 }
