@@ -97,16 +97,16 @@ for (let i = 0; i < 4; i++) {
   const indicator = document.createElement("div");
   switch (i) {
     case 0:
-      indicator.textContent = "North";
+      indicator.textContent = "North ⬆";
       break;
     case 1:
-      indicator.textContent = "East";
+      indicator.textContent = "East ⬅";
       break;
     case 2:
-      indicator.textContent = "South";
+      indicator.textContent = "South ⬇";
       break;
     case 3:
-      indicator.textContent = "West";
+      indicator.textContent = "West ➡";
   }
   indicator.classList.add("indicator");
   container.append(indicator);
@@ -116,8 +116,10 @@ for (let i = 0; i < 4; i++) {
   for (let j = 0; j < 14; j++) {
     const cell = document.createElement("div");
     cell.classList.add("grid-item");
-    if(j == 3 || j == 10){
+    if(j == 3){
       cell.classList.add("eye");
+    } else if(j==10){
+      cell.classList.add("eye-bottom");
     } else {
       cell.classList.add("empty");
       cell.addEventListener("click", function () {

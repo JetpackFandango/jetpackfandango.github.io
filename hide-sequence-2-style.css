@@ -51,6 +51,9 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+.grid-item.eye-bottom{
+  background-color: black;
+}
 .keypad-btn.used{
   background:rgba(100,100,100,.9) !important;
 }
