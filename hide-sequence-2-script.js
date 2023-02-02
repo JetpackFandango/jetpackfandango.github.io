@@ -135,12 +135,24 @@ for (let i = 0; i < 4; i++) {
           let allElements = Array.from(
             document.querySelectorAll(".grid-item")
           );
+          cell.classList.add("used");
+          cell.classList.remove("next-up");
+          let lowest_next = 99;
+          let next_cell;
           for (let element of allElements) {
             const element_index = parseInt(element.getAttribute("index"));
-            if(element_index && element_index < index){
-              console.log(index,element_index);
-              element.classList.add("used");
+            element.classList.remove("next-up");
+            if(element_index > 0) {
+              if(element_index < index){
+                element.classList.add("used");
+              } else if(element_index < lowest_next && element_index != index) {
+                lowest_next = element_index;
+                next_cell = element;
+              }
             }
+          }
+          if(next_cell){
+            next_cell.classList.add('next-up');
           }
         }
       });

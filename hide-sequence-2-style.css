@@ -24,6 +24,9 @@
   background:white !important;
   background-color: white !important;
 }
+.next-up {
+  box-shadow: inset 7px 7px 17px 7px gold !important;
+}
 .keypad-btn{
   width:150px;
   height:150px;
@@ -41,7 +44,11 @@
   background:green;
 }
 .grid-item.eye{
-  background-color:black;
+  background-color: black;
+  background-image: url(eye.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .keypad-btn.used{
   background:rgba(100,100,100,.9) !important;
