@@ -21,7 +21,56 @@
 const keypad = document.querySelector(".keypad");
 const container = document.querySelector(".main-container");
 const keypad_buttons = document.querySelector(".keypad-btns");
+const message = document.querySelector(".message");
+const go_button = document.querySelector(".go-button");
+
 let go_mode = false;
+function goMode() {
+  container.classList.add("go-mode");
+  go_mode = true;
+  let allGrids = Array.from(
+    document.querySelectorAll(".grid-container")
+  );
+  for (let grid of allGrids) {
+    let allCells = Array.from(
+      grid.querySelectorAll(".grid-item")
+    );
+    const wall_index = grid.getAttribute("wall");
+    let found_cell = false;
+    for (let cell of allCells) {
+      if(cell.classList.contains('filled')){
+        found_cell = true;
+      }
+    }
+    if(!found_cell){
+      grid.classList.add("no-cells");
+      document.querySelector(".indicator[wall='"+wall_index+"']").classList.add("no-cells");
+    }
+  }
+}
+go_button.addEventListener("click", function () {
+  container.classList.add("go-mode");
+  go_mode = true;
+  let allGrids = Array.from(
+    document.querySelectorAll(".grid-container")
+  );
+  for (let grid of allGrids) {
+    let allCells = Array.from(
+      grid.querySelectorAll(".grid-item")
+    );
+    const wall_index = grid.getAttribute("wall");
+    let found_cell = false;
+    for (let cell of allCells) {
+      if(cell.classList.contains('filled')){
+        found_cell = true;
+      }
+    }
+    if(!found_cell){
+      grid.classList.add("no-cells");
+      document.querySelector(".indicator[wall='"+wall_index+"']").classList.add("no-cells");
+    }
+  }
+});
 for (let i = 0; i <= 28; i++) {
   const keypad_btn = document.createElement("div");
   // const height_in_range = i % 5 ? "." + (100/5) * (i % 5) : 1;
@@ -57,13 +106,14 @@ for (let i = 0; i <= 28; i++) {
         selected.textContent = "";
         selected.classList.add("empty");
       } else if (i == 27) {
-        container.classList.add("go-mode");
-        go_mode = true;
+        goMode();
       } else if(i == 28){
         location.reload();
       }
       else {
         selected.textContent = i;
+        selected.classList.add("filled");
+
         selected.setAttribute("index",i);
         selected.classList.remove("empty");
         100/5;
@@ -95,6 +145,7 @@ for (let i = 0; i <= 28; i++) {
 }
 for (let i = 0; i < 4; i++) {
   const indicator = document.createElement("div");
+  indicator.setAttribute("wall",i);
   switch (i) {
     case 0:
       indicator.textContent = "North ⬆";
@@ -112,10 +163,17 @@ for (let i = 0; i < 4; i++) {
   container.append(indicator);
   const grid = document.createElement("div");
   grid.classList.add("grid-container");
+  grid.setAttribute("wall",i);
 
   for (let j = 0; j < 14; j++) {
     const cell = document.createElement("div");
     cell.classList.add("grid-item");
+      cell.setAttribute("wall",i);
+    if(j< 7){
+      cell.setAttribute("row","up");
+    } else {
+      cell.setAttribute("row","down");
+    }
     if(j == 3){
       cell.classList.add("eye");
     } else if(j==10){
@@ -155,6 +213,37 @@ for (let i = 0; i < 4; i++) {
           }
           if(next_cell){
             next_cell.classList.add('next-up');
+            let row = next_cell.getAttribute("row");
+
+            let wall = next_cell.getAttribute("wall");
+            const items_in_same_area = Array.from(document.querySelectorAll(".filled.grid-item[wall='"+wall+"'][row='"+row+"']"));
+            let order_num = 0;
+            let z = 0;
+            for (let item of items_in_same_area) {
+              z++;
+              if(item == next_cell){
+                order_num = z;
+              }
+            }
+            switch(parseInt(wall)) {
+              case 0:
+                wall = "North";
+                break;
+              case 1:
+                wall = "East"
+                break;
+              case 2:
+                wall = "South";
+                break;
+              case 3:
+                wall = "West";
+                break;
+            }
+            if(parseInt(lowest_next) == parseInt(index) + 1){
+              message.textContent = wall + " " + row + " " + order_num;
+            } else {
+              message.textContent = "Not Yet - " + wall + " " + row + " " + order_num;
+            }
           }
         }
       });
