@@ -100,13 +100,13 @@ for (let i = 0; i < 4; i++) {
       indicator.textContent = "North ⬆";
       break;
     case 1:
-      indicator.textContent = "East ⬅";
+      indicator.textContent = "East ➡";
       break;
     case 2:
       indicator.textContent = "South ⬇";
       break;
     case 3:
-      indicator.textContent = "West ➡";
+      indicator.textContent = "West ⬅";
   }
   indicator.classList.add("indicator");
   container.append(indicator);

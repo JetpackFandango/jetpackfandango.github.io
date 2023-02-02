@@ -44,6 +44,11 @@
 .keypad-btn.start-btn {
   background:green;
 }
+.reset-button {
+  font-size: 30px;
+  padding:10px;
+  margin-top:10px;
+}
 .grid-item.eye{
   background-color: black;
   background-image: url(eye.png);
