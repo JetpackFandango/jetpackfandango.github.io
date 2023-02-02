@@ -83,8 +83,10 @@ for (let i = 0; i <= 28; i++) {
     keypad_btn.style.backgroundColor = "rgba(50,150,255,.9)";
   } else if (i < 21){
     keypad_btn.style.backgroundColor = "rgba(0,255,255,.9)";
+    keypad_btn.style.color = "black";
   } else if (i < 27){
     keypad_btn.style.backgroundColor = "rgba(255,255,0,.9)";
+    keypad_btn.style.color = "black";
   }
   keypad_btn.classList.add("keypad-btn");
   if (i == 0) {
