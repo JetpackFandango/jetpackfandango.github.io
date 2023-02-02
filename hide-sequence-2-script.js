@@ -1,127 +1,153 @@
-const keypad = document.querySelector('.keypad');
+/* todo: 
+  for example, North wall left half, row 1, 2nd number would be A2
+  North wall right half row 2 1st number would be D1
+  A C
+  B D
+  Follow roy g. biv, colors for background of cells. 
+  1-5 Red, 6-10 Orange, 11-15 Yellow, 16-20 Green, 21-26 Blue
+  Have the shade darken as the numbers get higher in their group
+  Begin Order up button, after clicking on a number already set
+  darken all previous numbers and highlight the next highest number 
+  with its code (E3) listed
 
-const keypad_buttons = document.querySelector('.keypad-btns');
-for(let i = 0; i < 27; i++){
-  const keypad_btn = document.createElement('div');
-  keypad_btn.classList.add('keypad-btn');
-  if(i == 0){
-    keypad_btn.textContent = 'X';
-  } else {
+  Actually change the ABCD stuff to say on the screen based on next number
+  EAST 2 TOP for 2nd from left on top of east wall.
+  Show Current and Next. When Clicking on current number increases by 1. 
+  If not found will say 'Awaiting Number'
+
+  Make the keypad the 1-5,6-10,11-15 colors too
+
+*/
+const keypad = document.querySelector(".keypad");
+const container = document.querySelector(".main-container");
+const keypad_buttons = document.querySelector(".keypad-btns");
+let go_mode = false;
+for (let i = 0; i <= 28; i++) {
+  const keypad_btn = document.createElement("div");
+  // const height_in_range = i % 5 ? "." + (100/5) * (i % 5) : 1;
+  if(i<6){
+    keypad_btn.style.backgroundColor = "rgba(255,0,0,.9)";
+  } else if (i < 11){
+    keypad_btn.style.backgroundColor = "rgba(0,255,0,.9)";
+  }
+  else if (i < 16){
+    keypad_btn.style.backgroundColor = "rgba(50,150,255,.9)";
+  } else if (i < 21){
+    keypad_btn.style.backgroundColor = "rgba(0,255,255,.9)";
+  } else if (i < 27){
+    keypad_btn.style.backgroundColor = "rgba(255,255,0,.9)";
+  }
+  keypad_btn.classList.add("keypad-btn");
+  if (i == 0) {
+    keypad_btn.textContent = "X";
+  } else if(i == 27){
+    keypad_btn.textContent = "GO";
+    keypad_btn.classList.add('start-btn');
+  } else if(i == 28){
+    keypad_btn.textContent = "RESET";
+    keypad_btn.classList.add('reset-btn');
+  }
+  else {
     keypad_btn.textContent = i;
   }
- keypad_btn.addEventListener('click', function(){
-   const selected = document.querySelector('.selected');
-   if(selected){
-     if(i ===0){
-       selected.textContent = '';
-     }
-      else {selected.textContent = i;
-           }
-   }
-   keypad.classList.add('close');
-   
- }); 
+  keypad_btn.addEventListener("click", function () {
+    const selected = document.querySelector(".selected");
+    if (selected) {
+      if (i === 0) {
+        selected.textContent = "";
+        selected.classList.add("empty");
+      } else if (i == 27) {
+        container.classList.add("go-mode");
+        go_mode = true;
+      } else if(i == 28){
+        location.reload();
+      }
+      else {
+        selected.textContent = i;
+        selected.setAttribute("index",i);
+        selected.classList.remove("empty");
+        100/5;
+        const height_in_range = i % 5 ? "." + (100/5) * (i % 5) : 1;
+        selected.classList.add('opacity-'+height_in_range);
+        if(i<6){
+          selected.classList.add('one-to-five');
+          selected.style.backgroundColor = "rgba(255,0,0,"+height_in_range+")";
+        } else if (i < 11){
+          selected.classList.add('six-to-ten');
+          selected.style.backgroundColor = "rgba(0,255,0,"+height_in_range+")";
+        }
+        else if (i < 16){
+          selected.classList.add('eleven-to-fifteen');
+          selected.style.backgroundColor = "rgba(50,150,255,"+height_in_range+")";
+        } else if (i < 21){
+          selected.classList.add('sixteen-to-twenty');
+          selected.style.backgroundColor = "rgba(0,255,255,"+height_in_range+")";
+        } else if (i < 27){
+          selected.classList.add('twenty-one-to-twenty-six');
+          selected.style.backgroundColor = "rgba(255,255,0,"+height_in_range+")";
+        }
+      }
+    }
+    keypad_btn.classList.add("used");
+    keypad.classList.add("close");
+  });
   keypad_buttons.append(keypad_btn);
 }
-const container = document.querySelector('.main-container');
-for (let i = 0; i < 4; i++){
-  const indicator = document.createElement('div');
-  switch(i){
+for (let i = 0; i < 4; i++) {
+  const indicator = document.createElement("div");
+  switch (i) {
     case 0:
-      indicator.textContent = 'North'
+      indicator.textContent = "North";
       break;
     case 1:
-      indicator.textContent = 'East'
+      indicator.textContent = "East";
       break;
     case 2:
-      indicator.textContent = 'South';
+      indicator.textContent = "South";
       break;
     case 3:
-      indicator.textContent = 'West';
+      indicator.textContent = "West";
   }
-  indicator.classList.add('indicator');
+  indicator.classList.add("indicator");
   container.append(indicator);
-  const grid = document.createElement('div');
-  grid.classList.add('grid-container');
-    
-  for(let j = 0; j < 14; j++){
-    const cell = document.createElement('div');
-    cell.classList.add('grid-item');
-    cell.addEventListener('click',function(){
-      let allElements = Array.from(document.querySelectorAll('.grid-item.selected'));
-for (let element of allElements) {
-  element.classList.remove('selected');
-}
-      keypad.classList.remove('close');
-      cell.classList.add('selected');
-    })
+  const grid = document.createElement("div");
+  grid.classList.add("grid-container");
+
+  for (let j = 0; j < 14; j++) {
+    const cell = document.createElement("div");
+    cell.classList.add("grid-item");
+    if(j == 3 || j == 10){
+      cell.classList.add("eye");
+    } else {
+      cell.classList.add("empty");
+      cell.addEventListener("click", function () {
+        if(!go_mode){
+          let allElements = Array.from(
+            document.querySelectorAll(".grid-item.selected")
+          );
+          for (let element of allElements) {
+            element.classList.remove("selected");
+          }
+          keypad.classList.remove("close");
+          cell.classList.add("selected");
+        } else {
+          const index =parseInt(cell.getAttribute("index"));
+          let allElements = Array.from(
+            document.querySelectorAll(".grid-item")
+          );
+          for (let element of allElements) {
+            const element_index = parseInt(element.getAttribute("index"));
+            if(element_index && element_index < index){
+              console.log(index,element_index);
+              element.classList.add("used");
+            }
+          }
+        }
+      });
+    }
+
     grid.appendChild(cell);
   }
   container.appendChild(grid);
 }
 
-// const gridContainer = document.querySelector('.grid-container');
-
-// for (let i = 0; i < 4; i++) {
-//   const gridItem = document.createElement('div');
-//   gridItem.classList.add('grid-item');
-//   gridItem.style.width = `calc(100% / 4)`;
-//   gridItem.style.height = '200px';
-//   gridItem.style.backgroundColor = 'lightgray';
-//   gridItem.style.border = '1px solid black';
-//   gridItem.style.boxSizing = 'border-box';
-//   gridItem.style.position = 'relative';
-  
-//   const gridInner = document.createElement('div');
-//   gridInner.classList.add('grid-inner');
-//   gridInner.style.width = '100%';
-//   gridInner.style.height = '100%';
-
-//   for (let j = 0; j < 2; j++) {
-//     const gridRow = document.createElement('div');
-//     gridRow.classList.add('grid-row');
-
-//     for (let k = 0; k < 7; k++) {
-//       const gridCell = document.createElement('div');
-//       gridCell.classList.add('grid-cell');
-//       gridRow.appendChild(gridCell);
-//     }
-
-//     gridInner.appendChild(gridRow);
-//   }
-
-//   gridItem.appendChild(gridInner);
-//   gridContainer.appendChild(gridItem);
-// }
-// const gridItems = document.querySelectorAll('.grid-item');
-// const keypad = document.querySelector('.keypad');
-// const keypadClose = document.querySelector('.keypad-close');
-// const keypadInput = document.querySelector('.keypad-input');
-// const keypadBtns = document.querySelectorAll('.keypad-btn');
-
-// gridItems.forEach(item => {
-//   item.addEventListener('click', () => {
-//     keypad.style.display = 'block';
-//     item.classList.add('selected');
-//   });
-// });
-
-// keypadClose.addEventListener('click', () => {
-//   keypad.style.display = 'none';
-// });
-
-// keypadBtns.forEach(btn => {
-//   btn.addEventListener('click', () => {
-//     keypadInput.value += btn.textContent;
-//   });
-// });
-
-// keypadInput.addEventListener('input', () => {
-//   if (keypadInput.value.length === 2) {
-//     const selectedItem = document.querySelector('.selected');
-//     selectedItem.textContent = keypadInput.value;
-//     keypad.style.display = 'none';
-//     keypadInput.value = '';
-//     selectedItem.classList.remove('selected');
-//   }
-// });

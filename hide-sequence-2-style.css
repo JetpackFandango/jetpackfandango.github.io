@@ -3,6 +3,7 @@
   top:0;
   left:0;
   max-width:100%;
+  background:rgba(0,0,0,.8);
 }
 .indicator{
   font-size: 30px;
@@ -15,6 +16,14 @@
   display:flex;
   flex-wrap: wrap;
 }
+.used {
+  background-color: rgba(0,0,0,.7) !important;
+}
+.go-mode .empty {
+  /* border: 0; */
+  background:white !important;
+  background-color: white !important;
+}
 .keypad-btn{
   width:150px;
   height:150px;
@@ -24,9 +33,34 @@
   margin:10px;
   font-size:60px;
   min-width:30px;
-  text-align:center; background:rgba(200,100,100,.9);
+  text-align:center; 
+  /* background:rgba(200,100,100,.9); */
   border-radius: 10%;
 }
+.keypad-btn.start-btn {
+  background:green;
+}
+.grid-item.eye{
+  background-color:black;
+}
+.keypad-btn.used{
+  background:rgba(100,100,100,.9) !important;
+}
+.grid-item.one-to-five{
+  /* background-color: red !important; */
+}
+/* .opacity-1{
+  opacity: .6;
+}
+.opacity-2{
+  opacity: .7;
+}
+.opacity-3 {
+  opacity: .8;
+}
+.opacity-4 {
+  opacity: .9;
+} */
 .grid-container {
   display: grid;
   max-width:100%;
