@@ -25,7 +25,8 @@
   background-color: white !important;
 }
 .next-up {
-  box-shadow: inset 7px 7px 17px 7px gold !important;
+  /* box-shadow: inset 0px 2px 9px 7px gold !important; */
+  box-shadow: inset 0px 2px 9px 7px black !important;
 }
 .keypad-btn{
   width:150px;
